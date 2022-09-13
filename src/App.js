@@ -36,7 +36,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {!user.id ? user.id : null}
         </a>
       </header>
     </div>
