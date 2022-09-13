@@ -1,11 +1,9 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Depois de clonar este projeto execute no terminal dentro da pasta raiz o seguinte comando:
+npm install ou yarn
 
-## Available Scripts
-
-In the project directory, you can run:
-
+# Para iniciar o projeto utilize o seguinte comando:
 ### `npm start`
 
 Runs the app in the development mode.\
