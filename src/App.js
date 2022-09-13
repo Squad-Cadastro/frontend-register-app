@@ -9,6 +9,10 @@ function App() {
   const [email, setEmail] = React.useState(""); 
   const [user, setUser] = React.useState({}); 
 
+  React.useEffect(()=>{
+    console.log(user);
+  },[user])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setUser(addUser(nome, email));
