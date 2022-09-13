@@ -59,7 +59,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {!user.id ? user.id : null}
+          {user.id ? user.id : null}
         </a>
       </header>
     </div>
