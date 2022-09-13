@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { addUser } from './service/api';
 
 function App() {
 
@@ -13,6 +12,26 @@ function App() {
     console.log(user);
   },[user])
 
+  const addUser = async (nome, email) =>  {
+    await fetch(`${process.env.REACT_APP_API_BACKEND_URL}/clientes`, {
+       method: 'POST',
+       body: JSON.stringify({
+          nome: nome,
+          email: email,
+       }),
+       headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+       },
+    })
+       .then((response) => response.json())
+       .then((data) => {
+          setUser((user) => [data, ...user]);
+       })
+       .catch((err) => {
+          console.log(err.message);
+       });
+ };   
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     setUser(addUser(nome, email));
