@@ -24,8 +24,8 @@ function App() {
        },
     })
        .then((response) => response.json())
-       .then((data) => {
-          setUser((user) => [data, ...user]);
+       .then((user) => {
+          setUser(user);
        })
        .catch((err) => {
           console.log(err.message);
