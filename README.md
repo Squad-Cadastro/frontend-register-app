@@ -1,7 +1,8 @@
 # Getting Started with Create React App
 
 Depois de clonar este projeto execute no terminal dentro da pasta raiz o seguinte comando:
-npm install ou yarn
+
+### `npm install ou yarn`
 
 # Para iniciar o projeto utilize o seguinte comando:
 ### `npm start`
