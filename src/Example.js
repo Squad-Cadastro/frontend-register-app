@@ -107,7 +107,7 @@ const handleSubmit = (e) => {
                 <div className="overflow-hidden shadow sm:rounded-md">
                   <div className="bg-white px-4 py-5 sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className="col-span-9 sm:col-span-3">
                         <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                           Nome
                         </label>
@@ -117,21 +117,6 @@ const handleSubmit = (e) => {
                           name="first-name"
                           id="first-name"
                           autoComplete="given-name"
-                          required
-                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        />
-                      </div>
-  
-                      <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                          Sobrenome
-                        </label>
-                        <input
-                          onChange={(e) => setNome(nome ? nome +''+ e.target.value : '')}
-                          type="text"
-                          name="last-name"
-                          id="last-name"
-                          autoComplete="family-name"
                           required
                           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
