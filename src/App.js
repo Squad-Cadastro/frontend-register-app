@@ -6,6 +6,8 @@ function App() {
 
   const [nome, setNome] = React.useState(""); 
   const [email, setEmail] = React.useState(""); 
+  const [documento, setDocumento] = React.useState("");
+  const [telefone, setTelefone] = React.useState("");
   const [user, setUser] = React.useState({}); 
 
   React.useEffect(()=>{
@@ -18,6 +20,8 @@ function App() {
        body: JSON.stringify({
           nome: nome,
           email: email,
+          documento: documento,
+          telefone: telefone,
        }),
        headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -34,7 +38,7 @@ function App() {
  
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUser(addUser(nome, email));
+    setUser(addUser(nome, email, documento, telefone));
  };  
 
   return (
@@ -51,7 +55,13 @@ function App() {
             <input type="text" className="ml-3 form-control text-sm font-medium text-gray-900" value={email} 
               onChange={(e) => setEmail(e.target.value)} 
             />
-            <button type="submit" className="ml-3">Adicionar User</button>
+            <input type="text" className="ml-3 form-control text-sm font-medium text-gray-900" value={telefone} 
+              onChange={(e) => setTelefone(e.target.value)} 
+            />
+            <input type="text" className="ml-3 form-control text-sm font-medium text-gray-900" value={documento} 
+              onChange={(e) => setDocumento(e.target.value)} 
+            />
+            <button type="submit" className="ml-3">Criar Conta</button>
          </form>
         <a
           className="App-link"
