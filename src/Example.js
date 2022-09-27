@@ -16,6 +16,7 @@
 */
 import React from 'react';
 import './signUp.css'
+import Input from './components/inputs/Input'
 
 export default function Example() {
   const [nome, setNome] = React.useState(""); 
@@ -171,15 +172,27 @@ const handleSubmit = (e) => {
                         <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
                           CEP
                         </label>
-                        <input
+                        <Input
+                          id="postal-code"
+                          name="postal-code"
+                          autoComplete="postal-code"
+                          placeholder="xxxxx-xxxx" 
+                          // maxLength={8}
+                          onChange={e => setCep(e.target.value)}
+                          mask="cep"
+                          required
+                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        />
+                        {/* <input
                           onChange={(e) => setCep(e.target.value)}
                           type="text"
                           name="postal-code"
                           id="postal-code"
+                          maxLength={8}
                           autoComplete="postal-code"
                           required
                           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        />
+                        /> */}
                       </div>
   
                       <div className="col-span-6 lg:col-span-3">
