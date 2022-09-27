@@ -36,7 +36,7 @@ import React from 'react';
             /* and other goodies */
           }) => (
             <form onSubmit={handleSubmit} className="flex flex-col self-center border-2 border-slate-500 rounded-3xl w-4/5  py-2">
-              <h1 className="text-black-500 ">Anywhere in your app!</h1>
+              <h1 className="text-black text-4xl mb-4">Cadastro de pessoa física</h1>
               <input 
                 className="self-center border-2 border-slate-500 rounded-3xl w-4/5 px-2 py-1 my-2"
                 type="text"
