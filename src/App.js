@@ -1,49 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Form from './pages/form';
 
 function App() {
 
-  const [nome, setNome] = React.useState(""); 
-  const [email, setEmail] = React.useState(""); 
-  const [documento, setDocumento] = React.useState("");
-  const [telefone, setTelefone] = React.useState("");
-  const [user, setUser] = React.useState({}); 
+  // const [nome, setNome] = React.useState(""); 
+  // const [email, setEmail] = React.useState(""); 
+  // const [documento, setDocumento] = React.useState("");
+  // const [telefone, setTelefone] = React.useState("");
+  // const [user, setUser] = React.useState({}); 
 
-  React.useEffect(()=>{
-    console.log(user);
-  },[user])
+//   React.useEffect(()=>{
+//     console.log(user);
+//   },[user])
 
-  const addUser = async (nome, email) =>  {
-    await fetch(`${process.env.REACT_APP_API_BACKEND_URL}/clientes`, {
-       method: 'POST',
-       body: JSON.stringify({
-          nome: nome,
-          email: email,
-          documento: documento,
-          telefone: telefone,
-       }),
-       headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-       },
-    })
-       .then((response) => response.json())
-       .then((user) => {
-          setUser(user);
-       })
-       .catch((err) => {
-          console.log(err.message);
-       });
- };   
+//   const addUser = async (nome, email) =>  {
+//     await fetch(`${process.env.REACT_APP_API_BACKEND_URL}/clientes`, {
+//        method: 'POST',
+//        body: JSON.stringify({
+//           nome: nome,
+//           email: email,
+//           documento: documento,
+//           telefone: telefone,
+//        }),
+//        headers: {
+//           'Content-type': 'application/json; charset=UTF-8',
+//        },
+//     })
+//        .then((response) => response.json())
+//        .then((user) => {
+//           setUser(user);
+//        })
+//        .catch((err) => {
+//           console.log(err.message);
+//        });
+//  };   
  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setUser(addUser(nome, email, documento, telefone));
- };  
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     setUser(addUser(nome, email, documento, telefone));
+//  };  
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p className="text-5xl font-bold underline">
           Edit <code>src/App.js</code> and save to reload.
@@ -71,7 +71,8 @@ function App() {
         >
           {user.id ? user.id : null}
         </a>
-      </header>
+      </header> */}
+      <Form/>
     </div>
   );
 }
