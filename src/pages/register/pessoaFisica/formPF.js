@@ -1,35 +1,31 @@
 import React, { useState } from "react";
 import api from '../../../service/api';
- import { Formik } from 'formik';
- 
- const FormPF = () => {
+import { Formik } from 'formik';
+import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from '../../../actions';
+import {addCliente} from '../../../reducers/cliente';
+
+const FormPF = () => {
+
+  const {form}  = useSelector (state => state.clienteReducer)
+  const dispatch = useDispatch();
 
   const [cep, setCepApi] = useState({});
 
   const handleBlurCep = async (e) => {
-    console.log("Foi" , e.target.value)
-    // if (e.target.values?.length !== 8) {
-    //   return;
-    // }
-    // else{
-      await api
-        .get(`/cep/${e.target.value}`)
-        .then((response) => setCepApi(response.data)).then(()=>console.log(cep))
-        .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-        })
-    // }
+    await api
+      .get(`/cep/${e.target.value}`)
+      .then((response) => setCepApi(response.data)).then(()=>console.log(cep))
+      .catch((err) => {
+      console.error("ops! ocorreu um erro" + err);
+      })
   }
 
-  
-
-
-
-    return(
+  return(
       <div className="flex flex-col py-5">
         <h1 className="text-black text-4xl mb-4">Preencher as informaçoes abaixo para criar sua conta pessoal</h1>
         <Formik 
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ tipo_pessoa: 'F' }}
           validate={values => {
             const errors = {};
             if (!values.email) {
@@ -46,7 +42,7 @@ import api from '../../../service/api';
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
-              console.log("value",values)
+              dispatch(addCliente(values))
             }, 400);
           }}
         >
@@ -58,7 +54,6 @@ import api from '../../../service/api';
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
           }) => (
             <form onSubmit={handleSubmit} className="flex flex-col self-center border-2 border-slate-500 rounded-3xl w-3/5  py-2">
               <input 
@@ -75,16 +70,25 @@ import api from '../../../service/api';
                 <input
                   className="flex w-auto grow  border-2 border-slate-500 rounded-3xl self-center px-2 py-1 mb-4"
                   type="text"
-                  name="cpf"
+                  name="documento"
                   placeholder = "CPF"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.cpf}
+                  value={values.documento}
+                />
+                <input
+                  className="flex w-auto grow  border-2 border-slate-500 rounded-3xl self-center px-2 py-1 mb-4"
+                  type="date"
+                  name="data_nascimento"
+                  placeholder = "Data nascimento"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.data_nascimento}
                 />
                 <input
                   className="flex w-auto grow border-2 border-slate-500 rounded-3xl self-center px-2 py-1 mb-4"
                   type="cel"
-                  name="celular"
+                  name="telefone"
                   placeholder = "Celular"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -104,11 +108,11 @@ import api from '../../../service/api';
                 <input 
                   className="flex w-auto grow border-2 border-slate-500 rounded-3xl self-center px-2 py-1 mb-4"
                   type="email"
-                  name="email"
+                  name="email1"
                   placeholder = "Confirmar email"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.email}
+                  value={values.email1}
                 />
               </div>
               <button 
@@ -121,8 +125,23 @@ import api from '../../../service/api';
             </form>
           )}
         </Formik>
+
+        {/* {"Somente p/ visualização"} */}
+        <table>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Celular</th>
+          </tr>
+          <tr>
+            <td> {form.name}</td>
+            <td>{form.documento}</td>
+            <td>{form.telefone}</td>
+          </tr>
+        </table>
+       
       </div>
   )
 };
  
- export default FormPF;
+export default FormPF;
