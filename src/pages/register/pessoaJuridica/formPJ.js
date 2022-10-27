@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { useSelector, useDispatch } from '../../../actions';
 import {addCliente} from '../../../reducers/cliente';
 
-const FormPF = () => {
+const FormPJ = () => {
 
   const {form}  = useSelector (state => state.clienteReducer)
   const dispatch = useDispatch();
@@ -23,9 +23,9 @@ const FormPF = () => {
 
   return(
       <div className="flex flex-col py-5">
-        <h1 className="text-black text-4xl mb-4">Preencher as informaçoes abaixo para criar sua conta pessoal</h1>
+        <h1 className="text-black text-4xl mb-4">Preencher as informaçoes abaixo para criar sua conta empresarial</h1>
         <Formik 
-          initialValues={{ tipo_pessoa: 'F', endereco:null }}
+          initialValues={{ tipo_pessoa: 'J', endereco:null }}
           validate={values => {
             const errors = {};
             if (!values.email) {
@@ -74,7 +74,7 @@ const FormPF = () => {
                   className="self-center border-2 border-slate-500 rounded-3xl w-full md:w-4/5 px-2 py-1 my-2"
                   type="text"
                   name="documento"
-                  placeholder = "CPF"
+                  placeholder = "CNPJ"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.documento}
@@ -162,4 +162,4 @@ const FormPF = () => {
   )
 };
  
-export default FormPF;
+export default FormPJ;
