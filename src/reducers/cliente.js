@@ -15,10 +15,10 @@ export const clienteReducer = createSlice({
 
 export const { ADD_CLIENTE } = clienteReducer.actions
 export const addCliente = (form) => async (dispatch) => {
-  // let response = await api.post('/clientes', form)
-  // if(response.status === '201'){
+  let response = await api.post('/clientes', form)
+  if(response.status === '201'){
     dispatch(ADD_CLIENTE(form))
-  // }
+  }
 }
 
 export default clienteReducer.reducer
