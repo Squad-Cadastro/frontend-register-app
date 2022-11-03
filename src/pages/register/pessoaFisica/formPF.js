@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import api from '../../../service/api';
 import { Formik } from 'formik';
 import { useSelector, useDispatch } from "react-redux";
@@ -11,23 +11,15 @@ const FormPF = () => {
   const {form}  = useSelector (state => state.clienteReducer)
   const dispatch = useDispatch();
 
-  const [cep, setCepApi] = useState({});
+  const ref = useRef();
 
-  const handleBlurCep = async (e) => {
-    await api
-      .get(`/cep/${e.target.value}`)
-      .then((response) => setCepApi(response.data)).then(()=>console.log(cep))
-      .catch((err) => {
-      console.error("ops! ocorreu um erro" + err);
-      })
-  }
 
   return(
       <div className="flex flex-col">
           <div className="grid md:grid-cols-2">
             <div className="grid justify-items-center">
               <h1 className="text-black text-5xl mt-7 mx-10">Preencher as informaçoes abaixo para criar sua conta pessoal</h1>
-              <img className="w-4/6" src={img} alt="Minha Figura"></img>
+              <img className="w-4/6 hidden  md:inline" src={img} alt="Minha Figura" ></img>
             </div>
             <div className="grid justify-items-center">
               <Formik 
@@ -88,11 +80,13 @@ const FormPF = () => {
                       />
                       <input
                         className="self-center border-b border-slate-500 hover:border-black px-2 my-5 focus:outline-none w-full md:w-4/6 md:mr-10 "
-                        type="date"
+                        ref={ref}
+                        type="text"
                         name="data_nascimento"
                         placeholder = "Data nascimento"
                         onChange={handleChange}
-                        onBlur={handleBlur}
+                        onFocus={() => (ref.current.type = "date")}
+                        onBlur={() => (ref.current.type = "text")}
                         value={values.data_nascimento}
                         required
                       />
