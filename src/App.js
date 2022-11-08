@@ -6,6 +6,8 @@ import FormPJ from './pages/register/pessoaJuridica/formPJ';
 import Home from './pages/homepage/Home';
 import SelectRecordsType from './pages/register/SelectRecordsType';
 import Menu from './components/Menu'
+import Footer from './components/Footer'
+
 
 import {
   BrowserRouter as Router,
@@ -25,6 +27,7 @@ function App() {
           <Route path="/pessoaJuridica" element={ <FormPJ />}/>
           <Route path="/logar" element={ <Home />}/>
         </Routes >
+        <Footer/>
       </Router>
     </div>
           

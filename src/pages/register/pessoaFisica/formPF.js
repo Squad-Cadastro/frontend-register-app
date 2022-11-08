@@ -18,7 +18,7 @@ const FormPF = () => {
       <div className="flex flex-col">
           <div className="grid md:grid-cols-2">
             <div className="grid justify-items-center">
-              <h1 className="text-black text-5xl mt-7 mx-10">Preencher as informaçoes abaixo para criar sua conta pessoal</h1>
+              <h1 className="text-black text-3xl md:text-5xl mt-7 mx-2 md:mx-10">Preencha as informações para criar sua conta pessoal</h1>
               <img className="w-4/6 hidden  md:inline" src={img} alt="Minha Figura" ></img>
             </div>
             <div className="grid justify-items-center">
