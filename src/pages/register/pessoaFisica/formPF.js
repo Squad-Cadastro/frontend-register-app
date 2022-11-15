@@ -57,11 +57,11 @@ const FormPF = () => {
                     <input 
                       className="self-center border-b border-slate-500 hover:border-black px-2 my-5 focus:outline-none w-full md:w-4/6 md:mr-10 "
                       type="text"
-                      name="name"
+                      name="nome"
                       placeholder = "Nome completo"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.name}
+                      value={values.nome}
                       required
                     />
                     {/* {errors.name && touched.name && errors.name} */}
@@ -82,12 +82,12 @@ const FormPF = () => {
                         className="self-center border-b border-slate-500 hover:border-black px-2 my-5 focus:outline-none w-full md:w-4/6 md:mr-10 "
                         ref={ref}
                         type="text"
-                        name="data_nascimento"
+                        name="dataNascimento"
                         placeholder = "Data nascimento"
                         onChange={handleChange}
                         onFocus={() => (ref.current.type = "date")}
                         onBlur={() => (ref.current.type = "text")}
-                        value={values.data_nascimento}
+                        value={values.dataNascimento}
                         required
                       />
                       <input
@@ -126,7 +126,7 @@ const FormPF = () => {
                       disabled={isSubmitting}
                       className="self-center bg-orange-400 rounded-3xl hover:bg-orange-500 w-full my-5 py-2  md:w-4/6 md:mr-10"
                     >
-                      Enviar
+                      Confirmar
                     </button>
                   </form>
                 )}

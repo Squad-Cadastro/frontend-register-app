@@ -59,11 +59,11 @@ const FormPJ = () => {
               <input 
                 className="self-center border-2 border-slate-500 rounded-3xl w-full md:w-4/5 px-2 py-1 my-2"
                 type="text"
-                name="name"
+                name="nome"
                 placeholder = "Nome completo"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.name}
+                value={values.nme}
                 required
               />
               {/* {errors.name && touched.name && errors.name} */}
@@ -83,11 +83,11 @@ const FormPJ = () => {
                 <input
                   className="self-center border-2 border-slate-500 rounded-3xl w-full md:w-4/5 px-2 py-1 my-2"
                   type="date"
-                  name="data_nascimento"
+                  name="dataNascimento"
                   placeholder = "Data nascimento"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.data_nascimento}
+                  value={values.dataNascimento}
                   required
                 />
                 <input
@@ -126,14 +126,15 @@ const FormPJ = () => {
                 disabled={isSubmitting}
                 className="self-center border-2 border-slate-500 rounded-3xl px-2 py-1 my-2"
               >
-                Finalizar cadastro
+                Confirmar
               </button>
             </form>
           )}
         </Formik>
+              
 
         {/* {"Somente p/ visualização"} */}
-        <table>
+        {/* <table>
             <tr>
               <th>Nome</th>
               <th>CPF</th>
@@ -157,7 +158,7 @@ const FormPJ = () => {
             )
           })       
           }
-        </table>
+        </table> */}
       </div>
   )
 };
