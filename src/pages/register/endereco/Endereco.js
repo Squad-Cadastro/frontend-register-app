@@ -14,6 +14,7 @@ const Endereco = () => {
 
   const {form}  = useSelector (state => state.clienteReducer)
   const dispatch = useDispatch();
+  const [endereco, setEndereco] = useState({})
 
   const ref = useRef();
 
@@ -31,6 +32,16 @@ const Endereco = () => {
     return mergedForm;
   }
 
+
+  const findCEP = async(value) => {
+    console.log("aqui...",value)
+    let response = await api.get(`/cep/${value}`)
+    if (response.status === 200){
+      setEndereco(response.data)
+    }
+    console.log("endereco",endereco)
+  }
+
   return(
       <div className="flex flex-col">
           <div className="grid md:grid-cols-2">
@@ -40,7 +51,8 @@ const Endereco = () => {
             </div>
             <div className="grid justify-items-center">
               <Formik 
-                initialValues={{ }}
+                initialValues={endereco || {logradouro:"", numero:"", cep:"", bairro:"", localidade:"", uf:""}}
+                enableReinitialize
                 validate={values => {
                   const errors = {};
                   if (!values.cep) {
@@ -67,6 +79,7 @@ const Endereco = () => {
                 onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
                     setSubmitting(false);
+                    console.log(mergeIntoEndereco(values))
                     dispatch(addEndereco(mergeIntoEndereco(values)));
                   }, 400);
                 }}
@@ -79,6 +92,7 @@ const Endereco = () => {
                   handleBlur,
                   handleSubmit,
                   isSubmitting,
+                  
                 }) => (
                   <form onSubmit={handleSubmit} className="flex flex-col self-center w-5/6 md:w-5/6 ">
                     <input 
@@ -87,7 +101,7 @@ const Endereco = () => {
                       name="cep"
                       placeholder = "CEP"
                       onChange={handleChange}
-                      onBlur={handleBlur}
+                      onBlur={(e) => {findCEP(e.target.value)}}
                       value={values.cep}
                       required
                     />
