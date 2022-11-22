@@ -3,11 +3,11 @@ import api from '../../../service/api';
 import { Formik, Field } from 'formik';
 import { useSelector, useDispatch } from "react-redux";
 // import { useSelector, useDispatch } from '../../../actions';
-import {addCliente} from '../../../reducers/cliente';
+import {addEndereco} from '../../../reducers/cliente';
 import img from '../../../assets/images/pug.png'
 import { cpf } from 'cpf-cnpj-validator'; 
 import {
-  Link
+  Link, useNavigation
 } from "react-router-dom";
 
 const Endereco = () => {
@@ -17,6 +17,19 @@ const Endereco = () => {
 
   const ref = useRef();
 
+  const mergeIntoEndereco = (values) => {
+    var ultimoClienteForm = form[form.length - 1];
+    let mergedForm = {
+      nome: ultimoClienteForm.nome,
+      documento: ultimoClienteForm.documento,
+      email: ultimoClienteForm.email,
+      telefone: ultimoClienteForm.telefone,
+      tipoPessoa: ultimoClienteForm.tipoPessoa,
+      dataNascimento: ultimoClienteForm.dataNascimento,
+      endereco: [values]
+    };
+    return mergedForm;
+  }
 
   return(
       <div className="flex flex-col">
@@ -30,36 +43,31 @@ const Endereco = () => {
                 initialValues={{ }}
                 validate={values => {
                   const errors = {};
-                  if (!values.nome) {
-                    errors.nome = 'Required';
+                  if (!values.cep) {
+                    errors.cep = 'Required';
                   }
-                  if (!values.documento) {
-                    errors.documento = 'Required';
-                  }else if(!cpf.isValid(values.documento)){
-                    errors.email = 'cpf inválido';
+                  if (!values.uf) {
+                    errors.uf = 'Required';
                   }
-                  if (!values.dataNascimento) {
-                    errors.dataNascimento = 'Required';
+                  if (!values.localidade) {
+                    errors.localidade = 'Required';
                   }
-                  if (!values.telefone) {
-                    errors.telefone = 'Required';
+                  if (!values.bairro) {
+                    errors.bairro = 'Required';
                   }
-                  if (!values.email) {
-                    errors.email = 'Required';
-                  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-                    errors.email = 'email inválido';
+                  if (!values.logradouro) {
+                    errors.logradouro = 'Required';
                   }
-                  if (!values.politica) {
-                    errors.politica = 'Required';
+                  if (!values.numero) {
+                    errors.numero = 'Required';
                   }
                   return errors;
                 }}
                 
                 onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
                     setSubmitting(false);
-                    dispatch(addCliente(values))
+                    dispatch(addEndereco(mergeIntoEndereco(values)));
                   }, 400);
                 }}
               >
