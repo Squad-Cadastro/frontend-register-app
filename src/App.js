@@ -23,6 +23,7 @@ function App() {
         <Menu/>
         <Routes >
           <Route exact path="/" element={ <Home />}/>
+          <Route exact path="/home" element={ <Home />}/>
           <Route path="/cadastrar" element={ <SelectRecordsType />}/>
           <Route path="/pessoaFisica" element={ <FormPF />}/>
           <Route path="/pessoaJuridica" element={ <FormPJ />}/>

@@ -10,6 +10,9 @@ export const clienteReducer = createSlice({
     ADD_CLIENTE: (state, action) => {
       state.form = [...state.form, action.payload]
     },
+    ADD_ENDERECO: (state, action) => {
+      state.res = action.payload
+    },
   },
 })
 
@@ -20,12 +23,18 @@ export const addCliente = (form) => async (dispatch) => {
 }
 
 export const { ADD_ENDERECO } = clienteReducer.actions
-export const addEndereco = (form) => async (dispatch) => {
+export const addEndereco = (form, callback) => async (dispatch) => {
+  console.log("form...............", form)
   let response = await api.post('/clientes', form)
-  if (response.status === '201') {
-    dispatch(ADD_ENDERECO(form))
+  if (response.status === 201) {
+    console.log("response.data",response.data)
+    dispatch(ADD_ENDERECO(response.data))
+    if(callback){
+      callback(response.data)
+    }
   }
-  alert(JSON.stringify(response, null, 2));
+  // alert(JSON.stringify(response.data, null, 2));
 }
+
 
 export default clienteReducer.reducer
