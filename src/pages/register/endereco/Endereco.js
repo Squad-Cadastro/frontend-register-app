@@ -5,16 +5,19 @@ import { useSelector, useDispatch } from "react-redux";
 // import { useSelector, useDispatch } from '../../../actions';
 import {addEndereco} from '../../../reducers/cliente';
 import img from '../../../assets/images/pug.png'
-import { cpf } from 'cpf-cnpj-validator'; 
-import {
-  Link, useNavigation
-} from "react-router-dom";
+import Alert from '@mui/material/Alert';
+import { useNavigate } from "react-router-dom";
+
 
 const Endereco = () => {
 
   const {form}  = useSelector (state => state.clienteReducer)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [endereco, setEndereco] = useState({})
+  const [showAlert, setShowAlert] = useState(false)
+  const [res, setRes] = useState(false)
+
 
   const ref = useRef();
 
@@ -34,16 +37,35 @@ const Endereco = () => {
 
 
   const findCEP = async(value) => {
-    console.log("aqui...",value)
     let response = await api.get(`/cep/${value}`)
     if (response.status === 200){
       setEndereco(response.data)
     }
-    console.log("endereco",endereco)
   }
 
+  const AlertId = (response) =>{
+    setRes(response)
+    setShowAlert(true)
+  }
   return(
       <div className="flex flex-col">
+        {showAlert ?
+          <Alert 
+            action={
+              <div>
+                <button onClick={() =>  navigator.clipboard.writeText(res.id)} color="inherit" size="small"  className="m-2">
+                  Copiar
+                </button>
+                <button onClick={() => {setShowAlert(false); navigate("/home") }} color="inherit" size="small">
+                  Fechar
+                </button>
+              </div>
+            }
+          >
+            Id: {res.id}
+          </Alert>
+          :null
+        }
           <div className="grid md:grid-cols-2">
             <div className="grid justify-items-center">
               <h1 className="text-black text-3xl md:text-5xl mt-7 mx-2 md:mx-10">Preencha as informações a respeito do seu endereço</h1>
@@ -79,8 +101,8 @@ const Endereco = () => {
                 onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
                     setSubmitting(false);
-                    console.log(mergeIntoEndereco(values))
-                    dispatch(addEndereco(mergeIntoEndereco(values)));
+                    navigator.clipboard.writeText('Copy this text to clipboard')
+                    dispatch(addEndereco(mergeIntoEndereco(values),AlertId));
                   }, 400);
                 }}
               >
@@ -168,7 +190,7 @@ const Endereco = () => {
                     {errors.numero && touched.numero && errors.numero}
                     <button 
                       type="submit" 
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || showAlert}
                       className="self-center bg-orange-400 rounded-3xl hover:bg-orange-500 w-full my-5 py-2  md:w-4/6 md:mr-10"
                     >
                       Confirmar
